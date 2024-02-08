@@ -42,3 +42,9 @@ expo-env.d.ts
 
 android
 ios
+
+# build file
+build*
+
+# app
+*.app
