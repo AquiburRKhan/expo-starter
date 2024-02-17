@@ -3,29 +3,42 @@ import { persist, createJSONStorage } from "zustand/middleware";
 import { mmkvStorage } from "./persistStorage/mmkvStorage";
 
 export interface GlobalStoreState {
-  isDarkMode: boolean | undefined;
-  user: { name: string; age: number };
+  settings: {
+    theme: "light" | "dark" | "system";
+    themeLabel: "Light" | "Dark" | "System default";
+  };
   enableDarkMode: () => void;
-  disableDarkMode: () => void;
-  changeUserName: (name: string) => void;
-  increaseUserAge: () => void;
+  enableLightMode: () => void;
+  enableSystemMode: () => void;
 }
 
 const useGlobalStore = create<GlobalStoreState>(
   // @ts-ignore
   persist(
     (set, get) => ({
-      isDarkMode: undefined,
-      user: { name: "John Doe", age: 25 },
-      enableDarkMode: () => set(() => ({ isDarkMode: true })),
-      disableDarkMode: () => set(() => ({ isDarkMode: false })),
-      changeUserName: (name: string) =>
-        set(() => ({ user: { name, age: 25 } })),
-      increaseUserAge: () =>
-        set((state) => ({ user: { ...state.user, age: get().user.age + 1 } })),
+      settings: {
+        theme: "system",
+        themeLabel: "System default",
+      },
+      enableDarkMode: () =>
+        set(() => ({
+          settings: { ...get().settings, theme: "dark", themeLabel: "Dark" },
+        })),
+      enableLightMode: () =>
+        set(() => ({
+          settings: { ...get().settings, theme: "light", themeLabel: "Light" },
+        })),
+      enableSystemMode: () =>
+        set(() => ({
+          settings: {
+            ...get().settings,
+            theme: "system",
+            themeLabel: "System default",
+          },
+        })),
     }),
     {
-      name: "global-store",
+      name: "task-tracker-v1",
       storage: createJSONStorage(() => mmkvStorage),
     }
   )

@@ -46,12 +46,6 @@ const AnimatedView = React.memo(({ width }: { width: SharedValue<number> }) => {
 
 const LibExamples = () => {
   const theme = useTheme<Theme>();
-  const isDarkMode = useGlobalStore((state) => state.isDarkMode);
-  const user = useGlobalStore((state) => state.user);
-  const enableDarkMode = useGlobalStore((state) => state.enableDarkMode);
-  const disableDarkMode = useGlobalStore((state) => state.disableDarkMode);
-  const changeUserName = useGlobalStore((state) => state.changeUserName);
-  const increaseUserAge = useGlobalStore((state) => state.increaseUserAge);
   const width = useSharedValue(100);
 
   const handlePress = () => {
@@ -176,66 +170,11 @@ const LibExamples = () => {
         <Text>Theming</Text>
         <Pressable
           style={{
-            backgroundColor: theme.colors.primary,
+            backgroundColor: theme.colors.primaryButtonBackground,
             padding: theme.spacing.m,
           }}
         >
           <Text>Hello</Text>
-        </Pressable>
-      </View>
-      {/* Global state with zustand example */}
-      <View
-        style={{
-          alignItems: "center",
-          justifyContent: "center",
-          flexGrow: 1,
-          marginTop: 20,
-        }}
-      >
-        <Text>Zustand</Text>
-        <Text>
-          isDarkMode:{" "}
-          {isDarkMode ? "true" : isDarkMode === undefined ? "" : "false"}
-        </Text>
-        <Pressable
-          style={{
-            backgroundColor: theme.colors.primary,
-            padding: theme.spacing.m,
-          }}
-          onPress={enableDarkMode}
-        >
-          <Text>Enable</Text>
-        </Pressable>
-        <Pressable
-          style={{
-            backgroundColor: theme.colors.primary,
-            padding: theme.spacing.m,
-          }}
-          onPress={disableDarkMode}
-        >
-          <Text>Disable</Text>
-        </Pressable>
-
-        <Text>
-          User Name: {user.name}, User Age: {user.age}
-        </Text>
-        <Pressable
-          style={{
-            backgroundColor: theme.colors.primary,
-            padding: theme.spacing.m,
-          }}
-          onPress={() => changeUserName("Aquib")}
-        >
-          <Text>Change User Name</Text>
-        </Pressable>
-        <Pressable
-          style={{
-            backgroundColor: theme.colors.primary,
-            padding: theme.spacing.m,
-          }}
-          onPress={increaseUserAge}
-        >
-          <Text>Increase User Age</Text>
         </Pressable>
       </View>
     </ScrollView>

@@ -1,9 +1,7 @@
-import defaultTheme from "@/theme";
-import { ThemeProvider } from "@shopify/restyle";
-import { useFonts } from "expo-font";
-import { Stack } from "expo-router";
-import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { useFonts } from "expo-font";
+import * as SplashScreen from "expo-splash-screen";
+import { RootLayoutNav } from "@/components/layout/RootLayoutNav";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -47,14 +45,4 @@ export default function RootLayout() {
   }
 
   return <RootLayoutNav />;
-}
-
-function RootLayoutNav() {
-  return (
-    <ThemeProvider theme={defaultTheme}>
-      <Stack>
-        <Stack.Screen name="index" options={{}} />
-      </Stack>
-    </ThemeProvider>
-  );
 }

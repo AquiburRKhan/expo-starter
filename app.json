@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "starter-app",
-    "slug": "starter-app",
+    "name": "Task Tracker",
+    "slug": "task-tracker",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -10,31 +10,26 @@
     "splash": {
       "image": "./assets/images/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#e1d6bf"
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.aquibur.rahman.starterapp"
+      "bundleIdentifier": "com.aquibur.rahman.tasktracker"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#e1d6bf"
       },
-      "package": "com.aquibur.rahman.starterapp"
+      "package": "com.aquibur.rahman.tasktracker"
     },
     "web": {
       "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },
-    "plugins": [
-      "expo-router",
-      "expo-localization"
-    ],
+    "plugins": ["expo-router", "expo-localization"],
     "experiments": {
       "typedRoutes": true
     },
@@ -43,7 +38,7 @@
         "origin": false
       },
       "eas": {
-        "projectId": "55ec3bf1-5f58-4be9-96bf-5751ead32d20"
+        "projectId": "8fc79c4f-e58f-4d8f-970b-be270654b068"
       }
     },
     "owner": "aquibur.rahman"
