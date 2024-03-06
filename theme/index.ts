@@ -84,6 +84,10 @@ const lightTheme = createTheme({
     drawerActiveTintColor: colors.primary,
     drawerActiveBackgroundColor: colors.tertiary,
     drawerInactiveTintColor: colors.secondary,
+    // toggle
+    toggleTrackColor: colors.secondary,
+    toggleThumbColor: colors.tertiary,
+    toggleTitleColor: colors.primary,
   },
   ...commonThemeProps,
 });
@@ -106,6 +110,10 @@ const darkTheme = createTheme({
     drawerActiveTintColor: colors.primary,
     drawerActiveBackgroundColor: colors.tertiary,
     drawerInactiveTintColor: colors.primary,
+    // toggle
+    toggleTrackColor: darkColors.secondary,
+    toggleThumbColor: darkColors.tertiary,
+    toggleTitleColor: darkColors.primary,
   },
   ...commonThemeProps,
 });

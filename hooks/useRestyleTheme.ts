@@ -1,7 +1,7 @@
 import { useGlobalStore } from "@/stores/settingsStore";
 import { useColorScheme } from "react-native";
 import { lightTheme, darkTheme, Theme } from "@/theme";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { setStatusBarStyle } from "expo-status-bar";
 import * as SystemUI from "expo-system-ui";
 
@@ -10,19 +10,19 @@ export const useRestyleTheme = () => {
   const selectedTheme = useGlobalStore((state) => state.settings.theme);
   const colorScheme = useColorScheme();
 
-  const implementLightTheme = () => {
+  const implementLightTheme = useCallback(() => {
     setRestyleTheme(lightTheme);
     SystemUI.setBackgroundColorAsync(lightTheme.colors.primaryBackground);
     /* Change status bar color opposite to theme selection */
     setStatusBarStyle("dark");
-  };
+  }, []);
 
-  const implementDarkTheme = () => {
+  const implementDarkTheme = useCallback(() => {
     setRestyleTheme(darkTheme);
     SystemUI.setBackgroundColorAsync(darkTheme.colors.primaryBackground);
     /* Change status bar color opposite to theme selection */
     setStatusBarStyle("light");
-  };
+  }, []);
 
   useEffect(() => {
     if (selectedTheme === "light") {

@@ -4,12 +4,14 @@ import { mmkvStorage } from "./persistStorage/mmkvStorage";
 
 export interface GlobalStoreState {
   settings: {
+    languageCode: "en" | "bn";
     theme: "light" | "dark" | "system";
-    themeLabel: "Light" | "Dark" | "System default";
   };
   enableDarkMode: () => void;
   enableLightMode: () => void;
   enableSystemMode: () => void;
+  setLanguageToBanglaInStore: () => void;
+  setLanguageToEnglishInStore: () => void;
 }
 
 const useGlobalStore = create<GlobalStoreState>(
@@ -17,28 +19,35 @@ const useGlobalStore = create<GlobalStoreState>(
   persist(
     (set, get) => ({
       settings: {
+        languageCode: "bn",
         theme: "system",
-        themeLabel: "System default",
       },
       enableDarkMode: () =>
         set(() => ({
-          settings: { ...get().settings, theme: "dark", themeLabel: "Dark" },
+          settings: { ...get().settings, theme: "dark" },
         })),
       enableLightMode: () =>
         set(() => ({
-          settings: { ...get().settings, theme: "light", themeLabel: "Light" },
+          settings: { ...get().settings, theme: "light" },
         })),
       enableSystemMode: () =>
         set(() => ({
           settings: {
             ...get().settings,
             theme: "system",
-            themeLabel: "System default",
           },
+        })),
+      setLanguageToBanglaInStore: () =>
+        set(() => ({
+          settings: { ...get().settings, languageCode: "bn" },
+        })),
+      setLanguageToEnglishInStore: () =>
+        set(() => ({
+          settings: { ...get().settings, languageCode: "en" },
         })),
     }),
     {
-      name: "task-tracker-v1",
+      name: "task-tracker-v8",
       storage: createJSONStorage(() => mmkvStorage),
     }
   )

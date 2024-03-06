@@ -1,17 +1,20 @@
 import { useState } from "react";
 import { useTheme } from "@shopify/restyle";
-import { Text, View, StyleSheet, Pressable } from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 import { Theme } from "@/theme";
-import { ThemeModal } from "@/components/settings/ThemeModal";
+import { ThemeModal } from "@/components/settings/theme/ThemeModal";
 import { useGlobalStore } from "@/stores/settingsStore";
 import { AppTitle } from "@/components/shared/AppTitle";
 import { AppText } from "@/components/shared/AppText";
+import { useLanguage } from "@/hooks/useLanguage";
+import { LanguageSelector } from "@/components/settings/language/LanguageSelector";
 
 const Settings = () => {
   const theme = useTheme<Theme>();
+  const { t } = useLanguage();
   const styles = SettingsStyles(theme);
 
-  const themeLabel = useGlobalStore((state) => state.settings.themeLabel);
+  const selectedTheme = useGlobalStore((state) => state.settings.theme);
   const [isThemeModalOpen, setIsThemeModalOpen] = useState(false);
 
   const toggleThemeModal = () => {
@@ -20,17 +23,33 @@ const Settings = () => {
 
   return (
     <View style={styles.settingsContainer}>
-      <AppTitle style={styles.settingsTitle}>Display options</AppTitle>
+      <AppTitle style={styles.settingsTitle}>
+        {t("settings.displayOptions")}
+      </AppTitle>
+      {/* Display Options */}
+
+      {/* Theme Selector */}
       <Pressable
-        style={styles.themeOption}
+        style={styles.settingOption}
         android_ripple={{
           color: theme.colors.primaryButtonRipple,
         }}
         onPress={toggleThemeModal}
       >
-        <AppText style={styles.themeOptionText}>Theme</AppText>
-        <AppText style={styles.themeOptionText}>{themeLabel}</AppText>
+        <AppText style={styles.settingOptionText}>
+          {t("settings.theme")}
+        </AppText>
+        <AppText style={styles.settingOptionText}>
+          {t(`settings.${selectedTheme}`)}
+        </AppText>
       </Pressable>
+      {/* Theme Selector */}
+
+      {/* Language Selector */}
+      <LanguageSelector styles={styles} />
+      {/* Language Selector */}
+
+      {/* Display Options */}
       <ThemeModal
         isModalVisible={isThemeModalOpen}
         toggleModal={toggleThemeModal}
@@ -52,14 +71,20 @@ const SettingsStyles = (theme: Theme) =>
       color: theme.colors.primaryText,
       marginBottom: theme.spacing.l,
     },
-    themeOption: {
+    settingOption: {
       flexDirection: "row",
       justifyContent: "space-between",
       paddingVertical: theme.spacing.m,
+      marginBottom: theme.spacing.m,
+      alignItems: "center",
     },
-    themeOptionText: {
+    settingOptionText: {
       fontSize: theme.fontSize.m,
       color: theme.colors.primaryText,
+    },
+    toggleOptionText: {
+      fontSize: theme.fontSize.m,
+      color: theme.colors.toggleTitleColor,
     },
   });
 

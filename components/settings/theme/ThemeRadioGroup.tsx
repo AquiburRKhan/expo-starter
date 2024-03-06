@@ -4,10 +4,11 @@ import { Theme } from "@/theme";
 import { StyleSheet } from "react-native";
 import { useEffect, useMemo, useState } from "react";
 import { useGlobalStore } from "@/stores/settingsStore";
+import { useLanguage } from "@/hooks/useLanguage";
 
-export const ThemeSelection = () => {
+export const ThemeRadioGroup = () => {
   const theme = useTheme<Theme>();
-  const styles = ThemeSelectionStyles(theme);
+  const styles = ThemeRadioGroupStyles(theme);
   const selectedTheme = useGlobalStore((state) => state.settings.theme);
   const [selectedThemeId, setSelectedThemeId] = useState<string | undefined>(
     selectedTheme
@@ -15,6 +16,7 @@ export const ThemeSelection = () => {
   const enableDarkMode = useGlobalStore((state) => state.enableDarkMode);
   const enableLightMode = useGlobalStore((state) => state.enableLightMode);
   const enableSystemMode = useGlobalStore((state) => state.enableSystemMode);
+  const { t } = useLanguage();
 
   useEffect(() => {
     if (selectedThemeId === "dark") {
@@ -30,19 +32,19 @@ export const ThemeSelection = () => {
     () => [
       {
         id: "light", // acts as primary key, should be unique and non-empty string
-        label: "Light",
+        label: t("settings.light"),
         selected: selectedTheme === "light",
         containerStyle: styles.radioButton,
       },
       {
         id: "dark",
-        label: "Dark",
+        label: t("settings.dark"),
         selected: selectedTheme === "dark",
         containerStyle: styles.radioButton,
       },
       {
         id: "system",
-        label: "System default",
+        label: t("settings.system"),
         selected: selectedTheme === "system",
         containerStyle: styles.radioButton,
       },
@@ -61,7 +63,7 @@ export const ThemeSelection = () => {
   );
 };
 
-const ThemeSelectionStyles = (theme: Theme) =>
+const ThemeRadioGroupStyles = (theme: Theme) =>
   StyleSheet.create({
     radioGroupContainer: {
       alignItems: "flex-start",

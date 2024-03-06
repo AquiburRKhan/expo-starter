@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
 import { RootLayoutNav } from "@/components/layout/RootLayoutNav";
+import { useLanguage } from "@/hooks/useLanguage";
 
 export {
   // Catch any errors thrown by the Layout component.
@@ -28,6 +29,7 @@ export default function RootLayout() {
     RobotoRegular: require("@/assets/fonts/Roboto-Regular.ttf"),
     RobotoLight: require("@/assets/fonts/Roboto-Light.ttf"),
   });
+  const { setInitialLocale } = useLanguage();
 
   // Expo Router uses Error Boundaries to catch errors in the navigation tree.
   useEffect(() => {
@@ -37,6 +39,7 @@ export default function RootLayout() {
   useEffect(() => {
     if (loaded) {
       SplashScreen.hideAsync();
+      setInitialLocale();
     }
   }, [loaded]);
 

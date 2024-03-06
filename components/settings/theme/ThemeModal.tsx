@@ -1,9 +1,10 @@
 import Modal from "react-native-modal";
-import { View, Text, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "@/theme";
-import { ThemeSelection } from "./ThemeSelection";
+import { ThemeRadioGroup } from "./ThemeRadioGroup";
 import { AppTitle } from "@/components/shared/AppTitle";
+import { useLanguage } from "@/hooks/useLanguage";
 
 type ThemeModalProps = {
   isModalVisible: boolean;
@@ -16,12 +17,13 @@ export const ThemeModal = ({
 }: ThemeModalProps) => {
   const theme = useTheme<Theme>();
   const styles = ThemeModalStyles(theme);
+  const { t } = useLanguage();
 
   return (
     <Modal isVisible={isModalVisible} onBackdropPress={toggleModal}>
       <View style={styles.modalContainer}>
-        <AppTitle style={styles.title}>Choose theme</AppTitle>
-        <ThemeSelection />
+        <AppTitle style={styles.title}>{t("settings.chooseTheme")}</AppTitle>
+        <ThemeRadioGroup />
       </View>
     </Modal>
   );
