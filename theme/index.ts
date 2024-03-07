@@ -1,7 +1,7 @@
 import { createTheme } from "@shopify/restyle";
 
 const palette = {
-  whiteLinen: "#f8f4ea",
+  nude: "#ffefd5",
   ebony: "#30323a",
   astorathRed: "#da432b",
   black: "#0B0B0B",
@@ -9,7 +9,7 @@ const palette = {
 };
 
 const colors = {
-  primary: palette.whiteLinen,
+  primary: palette.nude,
   secondary: palette.ebony,
   tertiary: palette.astorathRed,
   white: palette.white,
@@ -18,7 +18,7 @@ const colors = {
 
 const darkColors = {
   primary: palette.ebony,
-  secondary: palette.whiteLinen,
+  secondary: palette.nude,
   tertiary: palette.astorathRed,
   white: palette.white,
   black: palette.black,
@@ -80,6 +80,7 @@ const lightTheme = createTheme({
     // button
     primaryButtonRipple: colors.primary,
     primaryButtonBackground: colors.tertiary,
+    primaryButtonIcon: colors.primary,
     // drawer
     drawerActiveTintColor: colors.primary,
     drawerActiveBackgroundColor: colors.tertiary,
@@ -106,6 +107,7 @@ const darkTheme = createTheme({
     // button
     primaryButtonRipple: colors.primary,
     primaryButtonBackground: darkColors.tertiary,
+    primaryButtonIcon: colors.primary,
     // drawer
     drawerActiveTintColor: colors.primary,
     drawerActiveBackgroundColor: colors.tertiary,
