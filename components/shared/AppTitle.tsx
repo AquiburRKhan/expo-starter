@@ -17,5 +17,6 @@ const AppTitleStyles = (theme: Theme) =>
   StyleSheet.create({
     appTitle: {
       fontFamily: theme.titleFontFamily,
+      color: theme.colors.primaryText,
     },
   });

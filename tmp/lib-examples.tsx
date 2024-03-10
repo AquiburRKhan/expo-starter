@@ -13,7 +13,7 @@ import * as Localization from "expo-localization";
 import { I18n } from "i18n-js";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "@/theme";
-import { useGlobalStore } from "@/stores/settingsStore";
+import { useGlobalStore } from "@/stores/zustandStore";
 import React from "react";
 
 const translations = {

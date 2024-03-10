@@ -1,4 +1,4 @@
-import { useGlobalStore } from "@/stores/settingsStore";
+import { useGlobalStore } from "@/stores/zustandStore";
 import { useColorScheme } from "react-native";
 import { lightTheme, darkTheme, Theme } from "@/theme";
 import { useEffect, useState, useCallback } from "react";

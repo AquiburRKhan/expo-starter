@@ -17,5 +17,6 @@ const AppTextStyles = (theme: Theme) =>
   StyleSheet.create({
     AppText: {
       fontFamily: theme.textFontFamily,
+      color: theme.colors.primaryText,
     },
   });

@@ -3,7 +3,7 @@ import { useTheme } from "@shopify/restyle";
 import { View, StyleSheet, Pressable } from "react-native";
 import { Theme } from "@/theme";
 import { ThemeModal } from "@/components/settings/theme/ThemeModal";
-import { useGlobalStore } from "@/stores/settingsStore";
+import { useGlobalStore } from "@/stores/zustandStore";
 import { AppTitle } from "@/components/shared/AppTitle";
 import { AppText } from "@/components/shared/AppText";
 import { useLanguage } from "@/hooks/useLanguage";

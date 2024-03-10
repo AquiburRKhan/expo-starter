@@ -1,6 +1,6 @@
 import { I18n } from "i18n-js";
 import { banglaTranslations, englishTranslations } from "@/localization";
-import { useGlobalStore } from "@/stores/settingsStore";
+import { useGlobalStore } from "@/stores/zustandStore";
 import { useEffect, useMemo } from "react";
 
 const translations = { ...englishTranslations, ...banglaTranslations };

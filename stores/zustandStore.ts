@@ -7,11 +7,21 @@ export interface GlobalStoreState {
     languageCode: "en" | "bn";
     theme: "light" | "dark" | "system";
   };
+  tasks: Task[];
   enableDarkMode: () => void;
   enableLightMode: () => void;
   enableSystemMode: () => void;
   setLanguageToBanglaInStore: () => void;
   setLanguageToEnglishInStore: () => void;
+  addTask: (task: Task) => void;
+  editTask: (task: Task) => void;
+  deleteTask: (id: number) => void;
+}
+
+interface Task {
+  id?: number;
+  title: string;
+  description: string;
 }
 
 const useGlobalStore = create<GlobalStoreState>(
@@ -22,6 +32,7 @@ const useGlobalStore = create<GlobalStoreState>(
         languageCode: "bn",
         theme: "system",
       },
+      tasks: [],
       enableDarkMode: () =>
         set(() => ({
           settings: { ...get().settings, theme: "dark" },
@@ -45,9 +56,34 @@ const useGlobalStore = create<GlobalStoreState>(
         set(() => ({
           settings: { ...get().settings, languageCode: "en" },
         })),
+      addTask: (task: Task) => {
+        const newTask = {
+          ...task,
+          id: Date.now(),
+        };
+
+        set(() => ({
+          tasks: [...get().tasks, newTask],
+        }));
+      },
+      editTask: (task: Task) => {
+        set(() => ({
+          tasks: get().tasks.map((t) => {
+            if (t.id === task.id) {
+              return task;
+            }
+            return t;
+          }),
+        }));
+      },
+      deleteTask: (id: number) => {
+        set(() => ({
+          tasks: get().tasks.filter((task) => task.id !== id),
+        }));
+      },
     }),
     {
-      name: "task-tracker-v8",
+      name: "task-tracker-v2",
       storage: createJSONStorage(() => mmkvStorage),
     }
   )

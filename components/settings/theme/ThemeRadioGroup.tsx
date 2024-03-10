@@ -3,7 +3,7 @@ import { useTheme } from "@shopify/restyle";
 import { Theme } from "@/theme";
 import { StyleSheet } from "react-native";
 import { useEffect, useMemo, useState } from "react";
-import { useGlobalStore } from "@/stores/settingsStore";
+import { useGlobalStore } from "@/stores/zustandStore";
 import { useLanguage } from "@/hooks/useLanguage";
 
 export const ThemeRadioGroup = () => {
@@ -35,21 +35,25 @@ export const ThemeRadioGroup = () => {
         label: t("settings.light"),
         selected: selectedTheme === "light",
         containerStyle: styles.radioButton,
+        color: theme.colors.primaryText,
       },
       {
         id: "dark",
         label: t("settings.dark"),
         selected: selectedTheme === "dark",
         containerStyle: styles.radioButton,
+        color: theme.colors.primaryText,
       },
       {
         id: "system",
         label: t("settings.system"),
         selected: selectedTheme === "system",
         containerStyle: styles.radioButton,
+        color: theme.colors.primaryText,
       },
     ],
-    [selectedTheme]
+    // If the theme changes, the radio buttons should be updated
+    [theme]
   );
 
   return (

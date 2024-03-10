@@ -46,7 +46,8 @@ const commonThemeProps = {
   borderRadius: {
     xs: 4,
     s: 8,
-    m: 12,
+    m: 10,
+    ml: 12,
     l: 16,
     xl: 24,
   },
@@ -64,6 +65,9 @@ const commonThemeProps = {
   navigationFontFamily: "RobotoMedium",
   titleFontFamily: "RobotoRegular",
   textFontFamily: "PoppinsRegular",
+  buttonFontFamily: "PoppinsBold",
+  taskTitleFontFamily: "PoppinsMedium",
+  iconButtonSize: 30,
 };
 
 const lightTheme = createTheme({
@@ -81,6 +85,7 @@ const lightTheme = createTheme({
     primaryButtonRipple: colors.primary,
     primaryButtonBackground: colors.tertiary,
     primaryButtonIcon: colors.primary,
+    primaryButtonText: darkColors.secondary,
     // drawer
     drawerActiveTintColor: colors.primary,
     drawerActiveBackgroundColor: colors.tertiary,
@@ -89,6 +94,10 @@ const lightTheme = createTheme({
     toggleTrackColor: colors.secondary,
     toggleThumbColor: colors.tertiary,
     toggleTitleColor: colors.primary,
+    // text input styling
+    textInputBorder: colors.tertiary,
+    // task box
+    taskBoxBorder: colors.tertiary,
   },
   ...commonThemeProps,
 });
@@ -106,8 +115,9 @@ const darkTheme = createTheme({
     primaryText: darkColors.secondary,
     // button
     primaryButtonRipple: colors.primary,
-    primaryButtonBackground: darkColors.tertiary,
-    primaryButtonIcon: colors.primary,
+    primaryButtonBackground: darkColors.secondary,
+    primaryButtonIcon: colors.tertiary,
+    primaryButtonText: darkColors.tertiary,
     // drawer
     drawerActiveTintColor: colors.primary,
     drawerActiveBackgroundColor: colors.tertiary,
@@ -116,6 +126,10 @@ const darkTheme = createTheme({
     toggleTrackColor: darkColors.secondary,
     toggleThumbColor: darkColors.tertiary,
     toggleTitleColor: darkColors.primary,
+    // text input styling
+    textInputBorder: colors.tertiary,
+    // task box
+    taskBoxBorder: colors.tertiary,
   },
   ...commonThemeProps,
 });

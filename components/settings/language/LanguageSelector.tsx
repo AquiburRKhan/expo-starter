@@ -4,7 +4,7 @@ import { View } from "react-native";
 import Toggle from "react-native-toggle-element";
 import { useTheme } from "@shopify/restyle";
 import { Theme } from "@/theme";
-import { useGlobalStore } from "@/stores/settingsStore";
+import { useGlobalStore } from "@/stores/zustandStore";
 import { useLanguage } from "@/hooks/useLanguage";
 
 type LanguageSelectorProps = {
