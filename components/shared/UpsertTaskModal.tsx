@@ -8,6 +8,7 @@ import { AppButton } from "@/components/shared/AppButton";
 import { useGlobalStore } from "@/stores/zustandStore";
 import { Feather } from "@expo/vector-icons";
 import { AppIconButton } from "./AppIconButton";
+import { useLanguage } from "@/hooks/useLanguage";
 
 type UpsertTaskModalProps = {
   selectedTaskId: number | undefined;
@@ -20,6 +21,7 @@ export const UpsertTaskModal = ({
   isModalVisible,
   toggleModal,
 }: UpsertTaskModalProps) => {
+  const { t } = useLanguage();
   const theme = useTheme<Theme>();
   const styles = UpsertTaskModalStyles(theme);
 
@@ -69,7 +71,7 @@ export const UpsertTaskModal = ({
       <View style={styles.modalContainer}>
         <View style={styles.header}>
           <AppTitle style={styles.title}>
-            {selectedTaskId ? "Edit task" : "Add task"}
+            {selectedTaskId ? t("tasks.editTask") : t("tasks.addTask")}
           </AppTitle>
           {selectedTaskId ? (
             <AppIconButton onPress={deleteTask}>
@@ -82,14 +84,14 @@ export const UpsertTaskModal = ({
           ) : null}
         </View>
         <TextInput
-          placeholder="Title"
+          placeholder={`${t("tasks.title")}`}
           autoFocus
           style={styles.inputBox}
           value={title}
           onChangeText={(text) => setTitle(text)}
         />
         <TextInput
-          placeholder="Task"
+          placeholder={`${t("tasks.task")}`}
           style={styles.descriptionBox}
           value={description}
           multiline
@@ -98,20 +100,20 @@ export const UpsertTaskModal = ({
           onChangeText={(text) => setDescription(text)}
         />
         <View style={styles.actionBtnsContainer}>
-          <AppButton onPress={closeModal}>CANCEL</AppButton>
+          <AppButton onPress={closeModal}>{t("tasks.cancel")}</AppButton>
           {!selectedTaskId ? (
             <AppButton
               disabled={title.length === 0 || description.length === 0}
               onPress={addTask}
             >
-              ADD
+              {t("tasks.add")}
             </AppButton>
           ) : (
             <AppButton
               disabled={title.length === 0 || description.length === 0}
               onPress={saveTask}
             >
-              SAVE
+              {t("tasks.save")}
             </AppButton>
           )}
         </View>

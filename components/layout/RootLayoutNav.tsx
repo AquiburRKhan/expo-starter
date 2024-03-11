@@ -6,9 +6,11 @@ import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import { useRestyleTheme } from "@/hooks/useRestyleTheme";
 import { Theme } from "@/theme";
 import { StyleSheet } from "react-native";
+import { useLanguage } from "@/hooks/useLanguage";
 
 const navIconSize = 22;
 export const RootLayoutNav = () => {
+  const { t } = useLanguage();
   const [restyleTheme] = useRestyleTheme();
   const styles = RootLayoutNavStyles(restyleTheme);
 
@@ -40,8 +42,8 @@ export const RootLayoutNav = () => {
           <Drawer.Screen
             name="index" // This is the name of the page and must match the url from root
             options={{
-              drawerLabel: "Tasks",
-              title: "Tasks",
+              drawerLabel: `${t("tasks.tasks")}`,
+              title: `${t("tasks.tasks")}`,
               drawerIcon: ({ color }) => {
                 return (
                   <FontAwesome5 name="tasks" size={navIconSize} color={color} />
@@ -52,8 +54,8 @@ export const RootLayoutNav = () => {
           <Drawer.Screen
             name="settings"
             options={{
-              drawerLabel: "Settings",
-              title: "Settings",
+              drawerLabel: `${t("settings.settings")}`,
+              title: `${t("settings.settings")}`,
               drawerIcon: ({ color }) => {
                 return (
                   <Ionicons name="settings" size={navIconSize} color={color} />

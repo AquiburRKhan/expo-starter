@@ -1,6 +1,17 @@
 export const banglaTranslations = {
   bn: {
+    tasks: {
+      tasks: "কাজ",
+      addTask: "কাজ যোগ করুন",
+      editTask: "কাজ সম্পাদনা করুন",
+      title: "শিরোনাম",
+      task: "কাজ",
+      cancel: "বাতিল করুন",
+      add: "যোগ করুন",
+      save: "সংরক্ষণ করুন",
+    },
     settings: {
+      settings: "সেটিংস",
       displayOptions: "ডিসপ্লে অপশন",
       chooseTheme: "থিম সিলেক্ট করুন",
       theme: "থিম",
