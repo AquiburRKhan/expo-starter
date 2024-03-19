@@ -1,50 +1,65 @@
 import { Theme } from "@/theme";
 import { useTheme } from "@shopify/restyle";
 import { Entypo } from "@expo/vector-icons";
-import { View, StyleSheet, ScrollView, Pressable } from "react-native";
+import { View, StyleSheet, Pressable } from "react-native";
 import { AppText } from "@/components/shared/AppText";
 import { useState } from "react";
 import { UpsertTaskModal } from "@/components/shared/UpsertTaskModal";
 import { AppIconButton } from "@/components/shared/AppIconButton";
 import { useGlobalStore } from "@/stores/zustandStore";
 
+import DraggableFlatList, {
+  ScaleDecorator,
+  RenderItemParams,
+} from "react-native-draggable-flatlist";
+
 const Home = () => {
   const theme = useTheme<Theme>();
   const styles = HomeStyles(theme);
-  const tasks = useGlobalStore((state) => state.tasks);
   const [isTaskModalOpen, setIsTaskModalOpen] = useState(false);
   const [selectedTaskId, setSelectedTaskId] = useState<number | undefined>();
+
+  const tasks = useGlobalStore((state) => state.tasks);
+  const updateTasksOrder = useGlobalStore((state) => state.updateTasksOrder);
 
   const toggleTaskModal = (taskId?: number) => {
     setSelectedTaskId(taskId);
     setIsTaskModalOpen(!isTaskModalOpen);
   };
 
+  const renderItem = ({ item, drag }: RenderItemParams<any>) => {
+    return (
+      <ScaleDecorator activeScale={1.03}>
+        <Pressable
+          style={styles.innerTaskBox}
+          onLongPress={drag}
+          onPress={() => toggleTaskModal(item.id)}
+        >
+          <AppText
+            numberOfLines={1}
+            ellipsizeMode="tail"
+            style={styles.taskTitle}
+          >
+            {item.title}
+          </AppText>
+          <AppText numberOfLines={1} ellipsizeMode="tail">
+            {item.description}
+          </AppText>
+        </Pressable>
+      </ScaleDecorator>
+    );
+  };
+
   return (
     <View style={styles.homeContainer}>
       {tasks.length > 0 ? (
-        <ScrollView>
-          <View style={styles.tasksContainer}>
-            {tasks.map((task) => (
-              <View key={task.id} style={styles.taskBox}>
-                <Pressable onPress={() => toggleTaskModal(task.id)}>
-                  <View style={styles.innerTaskBox}>
-                    <AppText
-                      numberOfLines={2}
-                      ellipsizeMode="tail"
-                      style={styles.taskTitle}
-                    >
-                      {task.title}
-                    </AppText>
-                    <AppText numberOfLines={4} ellipsizeMode="tail">
-                      {task.description}
-                    </AppText>
-                  </View>
-                </Pressable>
-              </View>
-            ))}
-          </View>
-        </ScrollView>
+        <DraggableFlatList
+          containerStyle={styles.tasksContainer}
+          data={tasks}
+          onDragEnd={({ data }) => updateTasksOrder(data)}
+          keyExtractor={(task) => task.id?.toString() as string}
+          renderItem={renderItem}
+        />
       ) : (
         <View style={styles.noTasksTextContainer}>
           <AppText style={styles.noTasksText}>No tasks available</AppText>
@@ -91,17 +106,10 @@ const HomeStyles = (theme: Theme) =>
       right: 30,
     },
     tasksContainer: {
-      flexDirection: "row",
-      paddingVertical: theme.spacing.s,
-      paddingHorizontal: theme.spacing.s,
-      flexWrap: "wrap",
-    },
-    taskBox: {
-      width: "50%",
+      flex: 1,
     },
     innerTaskBox: {
       margin: theme.spacing.s,
-      height: 200,
       borderWidth: 1,
       borderColor: theme.colors.taskBoxBorder,
       borderRadius: theme.borderRadius.m,

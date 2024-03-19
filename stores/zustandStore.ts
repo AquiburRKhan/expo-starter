@@ -16,6 +16,7 @@ export interface GlobalStoreState {
   addTask: (task: Task) => void;
   editTask: (task: Task) => void;
   deleteTask: (id: number) => void;
+  updateTasksOrder: (tasks: Task[]) => void;
 }
 
 interface Task {
@@ -79,6 +80,11 @@ const useGlobalStore = create<GlobalStoreState>(
       deleteTask: (id: number) => {
         set(() => ({
           tasks: get().tasks.filter((task) => task.id !== id),
+        }));
+      },
+      updateTasksOrder: (tasks: Task[]) => {
+        set(() => ({
+          tasks,
         }));
       },
     }),
